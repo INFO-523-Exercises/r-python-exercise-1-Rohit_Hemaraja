@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Rohit Hemaraja">
+<meta name="author" content="Rohit_Hemaraja">
 
-<title>R-Exercise</title>
+<title>R exercise 01</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R-Exercise</h1>
+<h1 class="title">R exercise 01</h1>
 </div>
 
 
@@ -90,7 +90,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Rohit Hemaraja </p>
+             <p>Rohit_Hemaraja </p>
           </div>
   </div>
     
@@ -101,26 +101,511 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<pre><code></code></pre>
+<section id="libraries" class="level3">
+<h3 class="anchored" data-anchor-id="libraries">Libraries</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(dlookr,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       DMwR2, <span class="co"># Data Mining with R functions</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       GGally, <span class="co"># Pair-wise plots using ggplot2</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       Hmisc, <span class="co"># Data analysis </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       palmerpenguins, <span class="co"># Alternative to the Iris dataset</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       tidyverse) <span class="co"># Data wrangling, manipulation, visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="loading-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-data">Loading the Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(algae, <span class="at">package =</span> <span class="st">"DMwR2"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>Rows: 200
+Columns: 18
+$ season &lt;fct&gt; winter, spring, autumn, spring, autumn, winter, summer, autumn,…
+$ size   &lt;fct&gt; small, small, small, small, small, small, small, small, small, …
+$ speed  &lt;fct&gt; medium, medium, medium, medium, medium, high, high, high, mediu…
+$ mxPH   &lt;dbl&gt; 8.00, 8.35, 8.10, 8.07, 8.06, 8.25, 8.15, 8.05, 8.70, 7.93, 7.7…
+$ mnO2   &lt;dbl&gt; 9.8, 8.0, 11.4, 4.8, 9.0, 13.1, 10.3, 10.6, 3.4, 9.9, 10.2, 11.…
+$ Cl     &lt;dbl&gt; 60.800, 57.750, 40.020, 77.364, 55.350, 65.750, 73.250, 59.067,…
+$ NO3    &lt;dbl&gt; 6.238, 1.288, 5.330, 2.302, 10.416, 9.248, 1.535, 4.990, 0.886,…
+$ NH4    &lt;dbl&gt; 578.000, 370.000, 346.667, 98.182, 233.700, 430.000, 110.000, 2…
+$ oPO4   &lt;dbl&gt; 105.000, 428.750, 125.667, 61.182, 58.222, 18.250, 61.250, 44.6…
+$ PO4    &lt;dbl&gt; 170.000, 558.750, 187.057, 138.700, 97.580, 56.667, 111.750, 77…
+$ Chla   &lt;dbl&gt; 50.000, 1.300, 15.600, 1.400, 10.500, 28.400, 3.200, 6.900, 5.5…
+$ a1     &lt;dbl&gt; 0.0, 1.4, 3.3, 3.1, 9.2, 15.1, 2.4, 18.2, 25.4, 17.0, 16.6, 32.…
+$ a2     &lt;dbl&gt; 0.0, 7.6, 53.6, 41.0, 2.9, 14.6, 1.2, 1.6, 5.4, 0.0, 0.0, 0.0, …
+$ a3     &lt;dbl&gt; 0.0, 4.8, 1.9, 18.9, 7.5, 1.4, 3.2, 0.0, 2.5, 0.0, 0.0, 0.0, 2.…
+$ a4     &lt;dbl&gt; 0.0, 1.9, 0.0, 0.0, 0.0, 0.0, 3.9, 0.0, 0.0, 2.9, 0.0, 0.0, 0.0…
+$ a5     &lt;dbl&gt; 34.2, 6.7, 0.0, 1.4, 7.5, 22.5, 5.8, 5.5, 0.0, 0.0, 1.2, 0.0, 1…
+$ a6     &lt;dbl&gt; 8.3, 0.0, 0.0, 0.0, 4.1, 12.6, 6.8, 8.7, 0.0, 0.0, 0.0, 0.0, 0.…
+$ a7     &lt;dbl&gt; 0.0, 2.1, 9.7, 1.4, 1.0, 2.9, 0.0, 0.0, 0.0, 1.7, 6.0, 1.5, 2.1…</code></pre>
 </div>
 </div>
-<p>You can add options to executable code like this</p>
+</section>
+<section id="central-tendencies-mean-median-mode" class="level3">
+<h3 class="anchored" data-anchor-id="central-tendencies-mean-median-mode">Central Tendencies: Mean, Median &amp; Mode</h3>
+</section>
+<section id="mean" class="level3">
+<h3 class="anchored" data-anchor-id="mean">Mean</h3>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>()      <span class="co">#Returns mean of col a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] 16.9235</code></pre>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+</section>
+<section id="median" class="level3">
+<h3 class="anchored" data-anchor-id="median">Median</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">median</span>()    <span class="co">#Returns median of col a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.95</code></pre>
+</div>
+</div>
+</section>
+<section id="mode" class="level3">
+<h3 class="anchored" data-anchor-id="mode">Mode</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function for Mode</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm=</span><span class="cn">FALSE</span>){</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(na.rm) x<span class="ot">&lt;-</span>x[<span class="sc">!</span><span class="fu">is.na</span>(x)] <span class="co">#Checking the similarity</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ux <span class="ot">&lt;-</span> <span class="fu">unique</span> (x) <span class="co">#Storing unique values in ux</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span> (ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]) <span class="co">#Returns the freq of each of the unique values</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a2 <span class="sc">|&gt;</span> <span class="fu">Mode</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="dmwr-centralvalue-function" class="level3">
+<h3 class="anchored" data-anchor-id="dmwr-centralvalue-function">DMwR centralValue() function:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical variable</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">centralValue</span>() <span class="co">#returns median for numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.95</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Numerical variable</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>speed <span class="sc">|&gt;</span> <span class="fu">centralValue</span>() <span class="co">#returns mode for nominal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "high"</code></pre>
+</div>
+</div>
+</section>
+<section id="statistics-of-spread" class="level3">
+<h3 class="anchored" data-anchor-id="statistics-of-spread">Statistics of spread</h3>
+</section>
+<section id="variance" class="level3">
+<h3 class="anchored" data-anchor-id="variance">Variance</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">var</span>() <span class="co"># returns variance of col a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 455.7532</code></pre>
+</div>
+</div>
+</section>
+<section id="standard-deviation" class="level3">
+<h3 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">sd</span>() <span class="co"># returns standard deviation of col a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.34838</code></pre>
+</div>
+</div>
+</section>
+<section id="range" class="level3">
+<h3 class="anchored" data-anchor-id="range">Range</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">range</span>() <span class="co"># returns teh range of the col a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.0 89.8</code></pre>
+</div>
+</div>
+</section>
+<section id="maximum-value" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-value">Maximum Value</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">max</span>() <span class="co"># returns the maximum value in a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 89.8</code></pre>
+</div>
+</div>
+</section>
+<section id="minimum-value" class="level3">
+<h3 class="anchored" data-anchor-id="minimum-value">Minimum Value</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">min</span>() <span class="co"># returns the minimum value in a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="interquartile" class="level3">
+<h3 class="anchored" data-anchor-id="interquartile">Interquartile</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">IQR</span>() <span class="co"># returns the IQR of a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.3</code></pre>
+</div>
+</div>
+</section>
+<section id="quantiles" class="level3">
+<h3 class="anchored" data-anchor-id="quantiles">Quantiles</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">quantile</span>() <span class="co"># returns quantils of a1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   0%   25%   50%   75%  100% 
+ 0.00  1.50  6.95 24.80 89.80 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>algae<span class="sc">$</span>a1 <span class="sc">|&gt;</span> <span class="fu">quantile</span>(<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>)) <span class="co"># specific quantiles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  20%   80% 
+ 1.20 32.18 </code></pre>
+</div>
+</div>
+</section>
+<section id="missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values">Missing values</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computes the total number of NA values in the dataset</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>nas <span class="ot">&lt;-</span> algae <span class="sc">%&gt;%</span>                              </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dbl</span>(<span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.))) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The dataset contains "</span>, nas, <span class="st">"NA values. </span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The dataset contains  33 NA values. </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Computes the number of incomplete rows in the dataset</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>incomplete_rows <span class="ot">&lt;-</span> algae <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="sc">~!</span><span class="fu">complete.cases</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+dplyr 1.1.0.
+ℹ Please use `reframe()` instead.
+ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+  always returns an ungrouped data frame and adjust accordingly.
+ℹ The deprecated feature was likely used in the dplyr package.
+  Please report the issue at &lt;https://github.com/tidyverse/dplyr/issues&gt;.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"The dataset contains "</span>, incomplete_rows, <span class="st">"(out of "</span>, <span class="fu">nrow</span>(algae),<span class="st">") incomplete rows. </span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The dataset contains  200 (out of  200 ) incomplete rows. </code></pre>
+</div>
+</div>
+</section>
+<section id="summaries-of-a-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="summaries-of-a-dataset">Summaries of a Dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    season       size       speed         mxPH            mnO2       
+ autumn:40   large :45   high  :84   Min.   :5.600   Min.   : 1.500  
+ spring:53   medium:84   low   :33   1st Qu.:7.700   1st Qu.: 7.725  
+ summer:45   small :71   medium:83   Median :8.060   Median : 9.800  
+ winter:62                           Mean   :8.012   Mean   : 9.118  
+                                     3rd Qu.:8.400   3rd Qu.:10.800  
+                                     Max.   :9.700   Max.   :13.400  
+                                     NA's   :1       NA's   :2       
+       Cl               NO3              NH4                oPO4       
+ Min.   :  0.222   Min.   : 0.050   Min.   :    5.00   Min.   :  1.00  
+ 1st Qu.: 10.981   1st Qu.: 1.296   1st Qu.:   38.33   1st Qu.: 15.70  
+ Median : 32.730   Median : 2.675   Median :  103.17   Median : 40.15  
+ Mean   : 43.636   Mean   : 3.282   Mean   :  501.30   Mean   : 73.59  
+ 3rd Qu.: 57.824   3rd Qu.: 4.446   3rd Qu.:  226.95   3rd Qu.: 99.33  
+ Max.   :391.500   Max.   :45.650   Max.   :24064.00   Max.   :564.60  
+ NA's   :10        NA's   :2        NA's   :2          NA's   :2       
+      PO4              Chla               a1              a2        
+ Min.   :  1.00   Min.   :  0.200   Min.   : 0.00   Min.   : 0.000  
+ 1st Qu.: 41.38   1st Qu.:  2.000   1st Qu.: 1.50   1st Qu.: 0.000  
+ Median :103.29   Median :  5.475   Median : 6.95   Median : 3.000  
+ Mean   :137.88   Mean   : 13.971   Mean   :16.92   Mean   : 7.458  
+ 3rd Qu.:213.75   3rd Qu.: 18.308   3rd Qu.:24.80   3rd Qu.:11.375  
+ Max.   :771.60   Max.   :110.456   Max.   :89.80   Max.   :72.600  
+ NA's   :2        NA's   :12                                        
+       a3               a4               a5               a6        
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+ Median : 1.550   Median : 0.000   Median : 1.900   Median : 0.000  
+ Mean   : 4.309   Mean   : 1.992   Mean   : 5.064   Mean   : 5.964  
+ 3rd Qu.: 4.925   3rd Qu.: 2.400   3rd Qu.: 7.500   3rd Qu.: 6.925  
+ Max.   :42.800   Max.   :44.600   Max.   :44.400   Max.   :77.600  
+                                                                    
+       a7        
+ Min.   : 0.000  
+ 1st Qu.: 0.000  
+ Median : 1.000  
+ Mean   : 2.495  
+ 3rd Qu.: 2.400  
+ Max.   :31.600  
+                 </code></pre>
+</div>
+</div>
+</section>
+<section id="hmiscs-describe" class="level3">
+<h3 class="anchored" data-anchor-id="hmiscs-describe">Hmisc’s describe()</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"penguins"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> Hmisc<span class="sc">::</span><span class="fu">describe</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>penguins 
+
+ 8  Variables      344  Observations
+--------------------------------------------------------------------------------
+species 
+       n  missing distinct 
+     344        0        3 
+                                        
+Value         Adelie Chinstrap    Gentoo
+Frequency        152        68       124
+Proportion     0.442     0.198     0.360
+--------------------------------------------------------------------------------
+island 
+       n  missing distinct 
+     344        0        3 
+                                        
+Value         Biscoe     Dream Torgersen
+Frequency        168       124        52
+Proportion     0.488     0.360     0.151
+--------------------------------------------------------------------------------
+bill_length_mm 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     342        2      164        1    43.92    6.274    35.70    36.60 
+     .25      .50      .75      .90      .95 
+   39.23    44.45    48.50    50.80    51.99 
+
+lowest : 32.1 33.1 33.5 34   34.1, highest: 55.1 55.8 55.9 58   59.6
+--------------------------------------------------------------------------------
+bill_depth_mm 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     342        2       80        1    17.15    2.267     13.9     14.3 
+     .25      .50      .75      .90      .95 
+    15.6     17.3     18.7     19.5     20.0 
+
+lowest : 13.1 13.2 13.3 13.4 13.5, highest: 20.7 20.8 21.1 21.2 21.5
+--------------------------------------------------------------------------------
+flipper_length_mm 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     342        2       55    0.999    200.9    16.03    181.0    185.0 
+     .25      .50      .75      .90      .95 
+   190.0    197.0    213.0    220.9    225.0 
+
+lowest : 172 174 176 178 179, highest: 226 228 229 230 231
+--------------------------------------------------------------------------------
+body_mass_g 
+       n  missing distinct     Info     Mean      Gmd      .05      .10 
+     342        2       94        1     4202    911.8     3150     3300 
+     .25      .50      .75      .90      .95 
+    3550     4050     4750     5400     5650 
+
+lowest : 2700 2850 2900 2925 2975, highest: 5850 5950 6000 6050 6300
+--------------------------------------------------------------------------------
+sex 
+       n  missing distinct 
+     333       11        2 
+                        
+Value      female   male
+Frequency     165    168
+Proportion  0.495  0.505
+--------------------------------------------------------------------------------
+year 
+       n  missing distinct     Info     Mean      Gmd 
+     344        0        3    0.888     2008   0.8919 
+                            
+Value       2007  2008  2009
+Frequency    110   114   120
+Proportion 0.320 0.331 0.349
+
+For the frequency table, variable is rounded to the nearest 0.02
+--------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="dlookrs-describe" class="level3">
+<h3 class="anchored" data-anchor-id="dlookrs-describe">dlookr’s describe()</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> dlookr<span class="sc">::</span><span class="fu">describe</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 26
+  described_variables     n    na   mean      sd se_mean     IQR skewness
+  &lt;chr&gt;               &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 bill_length_mm        342     2   43.9   5.46   0.295     9.27   0.0531
+2 bill_depth_mm         342     2   17.2   1.97   0.107     3.1   -0.143 
+3 flipper_length_mm     342     2  201.   14.1    0.760    23      0.346 
+4 body_mass_g           342     2 4202.  802.    43.4    1200      0.470 
+5 year                  344     0 2008.    0.818  0.0441    2     -0.0537
+# ℹ 18 more variables: kurtosis &lt;dbl&gt;, p00 &lt;dbl&gt;, p01 &lt;dbl&gt;, p05 &lt;dbl&gt;,
+#   p10 &lt;dbl&gt;, p20 &lt;dbl&gt;, p25 &lt;dbl&gt;, p30 &lt;dbl&gt;, p40 &lt;dbl&gt;, p50 &lt;dbl&gt;,
+#   p60 &lt;dbl&gt;, p70 &lt;dbl&gt;, p75 &lt;dbl&gt;, p80 &lt;dbl&gt;, p90 &lt;dbl&gt;, p95 &lt;dbl&gt;,
+#   p99 &lt;dbl&gt;, p100 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="summaries-on-a-subset-of-data" class="level3">
+<h3 class="anchored" data-anchor-id="summaries-on-a-subset-of-data">Summaries on a subset of data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgNO3 =</span> <span class="fu">mean</span>(NO3, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">medA1 =</span> <span class="fu">median</span>(a1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  avgNO3 medA1
+   &lt;dbl&gt; &lt;dbl&gt;
+1   3.28  6.95</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mxPH<span class="sc">:</span>Cl) <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="fu">list</span>(mean, median), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  mxPH_fn1 mnO2_fn1 Cl_fn1 mxPH_fn2 mnO2_fn2 Cl_fn2
+     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1     8.01     9.12   43.6     8.06      9.8   32.7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a1<span class="sc">:</span>a7) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="fu">funs</span>(var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `funs()` was deprecated in dplyr 0.8.0.
+ℹ Please use a list of either functions or lambdas:
+
+# Simple named list: list(mean = mean, median = median)
+
+# Auto named with `tibble::lst()`: tibble::lst(mean, median)
+
+# Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+     a1    a2    a3    a4    a5    a6    a7
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  456.  122.  48.3  19.5  56.1  136.  26.6</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(a1<span class="sc">:</span>a7) <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="fu">c</span>(<span class="st">"min"</span>, <span class="st">"max"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 14
+  a1_min a2_min a3_min a4_min a5_min a6_min a7_min a1_max a2_max a3_max a4_max
+   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1      0      0      0      0      0      0      0   89.8   72.6   42.8   44.6
+# ℹ 3 more variables: a5_max &lt;dbl&gt;, a6_max &lt;dbl&gt;, a7_max &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="use-summarise-with-group_by" class="level3">
+<h3 class="anchored" data-anchor-id="use-summarise-with-group_by">Use summarise() with group_by()</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>algae <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season, size) <span class="sc">|&gt;</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nObs =</span> <span class="fu">n</span>(), <span class="at">mA7 =</span> <span class="fu">median</span>(a7))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'season'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+# Groups:   season [4]
+   season size    nObs   mA7
+   &lt;fct&gt;  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;
+ 1 autumn large     11  0   
+ 2 autumn medium    16  1.05
+ 3 autumn small     13  0   
+ 4 spring large     12  1.95
+ 5 spring medium    21  1   
+ 6 spring small     20  0   
+ 7 summer large     10  0   
+ 8 summer medium    21  1   
+ 9 summer small     14  1.45
+10 winter large     12  0   
+11 winter medium    26  1.4 
+12 winter small     24  0   </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var =</span> <span class="fu">var</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species     var
+  &lt;fct&gt;     &lt;dbl&gt;
+1 Adelie     7.09
+2 Chinstrap 11.2 
+3 Gentoo     9.50</code></pre>
+</div>
+</div>
+</section>
+<section id="aggregating-data" class="level3">
+<h3 class="anchored" data-anchor-id="aggregating-data">Aggregating data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Can be helpful for summary functions that don’t return a scalar</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">var =</span> <span class="fu">quantile</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 2
+   species     var
+   &lt;fct&gt;     &lt;dbl&gt;
+ 1 Adelie     32.1
+ 2 Adelie     36.8
+ 3 Adelie     38.8
+ 4 Adelie     40.8
+ 5 Adelie     46  
+ 6 Chinstrap  40.9
+ 7 Chinstrap  46.3
+ 8 Chinstrap  49.6
+ 9 Chinstrap  51.1
+10 Chinstrap  58  
+11 Gentoo     40.9
+12 Gentoo     45.3
+13 Gentoo     47.3
+14 Gentoo     49.6
+15 Gentoo     59.6</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  dlookr<span class="sc">::</span><span class="fu">describe</span>(bill_length_mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 27
+  described_variables species       n    na  mean    sd se_mean   IQR skewness
+  &lt;chr&gt;               &lt;fct&gt;     &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 bill_length_mm      Adelie      151     1  38.8  2.66   0.217  4      0.162 
+2 bill_length_mm      Chinstrap    68     0  48.8  3.34   0.405  4.73  -0.0906
+3 bill_length_mm      Gentoo      123     1  47.5  3.08   0.278  4.25   0.651 
+# ℹ 18 more variables: kurtosis &lt;dbl&gt;, p00 &lt;dbl&gt;, p01 &lt;dbl&gt;, p05 &lt;dbl&gt;,
+#   p10 &lt;dbl&gt;, p20 &lt;dbl&gt;, p25 &lt;dbl&gt;, p30 &lt;dbl&gt;, p40 &lt;dbl&gt;, p50 &lt;dbl&gt;,
+#   p60 &lt;dbl&gt;, p70 &lt;dbl&gt;, p75 &lt;dbl&gt;, p80 &lt;dbl&gt;, p90 &lt;dbl&gt;, p95 &lt;dbl&gt;,
+#   p99 &lt;dbl&gt;, p100 &lt;dbl&gt;</code></pre>
+</div>
+</div>
 </section>
 
 </main>
