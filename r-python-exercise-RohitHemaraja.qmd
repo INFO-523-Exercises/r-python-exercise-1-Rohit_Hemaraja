@@ -5,13 +5,14 @@ format: html
 editor: visual
 ---
 
-```{}
+```         
 ```
 
 ### Libraries
 
 ```{r}
-library(pacman)
+if(!require("pacman"))
+   install.packages("pacman")
 
 p_load(dlookr,
        DMwR2, # Data Mining with R functions
